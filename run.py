@@ -23,6 +23,8 @@ app.add_url_rule('/api/productos/<int:id>', 'get_producto', get_producto, method
 app.add_url_rule('/api/productos/', 'create_productos', create_productos, methods=['POST'])
 app.add_url_rule('/api/productos/<int:id>', 'update_productos', update_productos, methods=['PUT'])
 app.add_url_rule('/api/productos/<int:id>', 'delete_productos', delete_productos, methods=['DELETE'])
+app.add_url_rule('/api/categorias', 'get_categorias', categorias, methods=['GET'])
+app.add_url_rule('/api/get_productos_by_categoria/<string:categoria>', 'get_productos_by_categoria', get_productos_by_categoria, methods=['GET'])
 
 
 if __name__ == '__main__':

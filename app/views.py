@@ -69,6 +69,15 @@ def delete_productos(id):
     response = jsonify({'message': 'Producto eliminado'})
     return _corsify_actual_response(response), 200
 
+def get_productos_by_categoria(categoria):
+    productos = Producto.get_productos_by_categoria(categoria)
+    lista_productos = [producto.serealize() for producto in productos]
+    return jsonify(lista_productos)
+
+def categorias():
+    categorias = Producto.get_categorias()
+    return jsonify(categorias)
+
 def _build_cors_preflight_response():
     response = make_response()
     response.headers.add("Access-Control-Allow-Origin", "*")

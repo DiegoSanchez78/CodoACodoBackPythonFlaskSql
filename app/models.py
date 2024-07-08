@@ -57,6 +57,37 @@ class Producto:
         cursor.execute("DELETE FROM productos WHERE id = %s", (self.id,))
         db.commit()
         cursor.close()
+    
+    def fetch_productos_by_categoria(categoria):
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("SELECT * FROM productos WHERE Categoria = %s", (categoria,))
+        rows = cursor.fetchall()
+        productos = [
+        {
+            'id': row[0],
+            'categoria': row[1],
+            'nombre_producto': row[2],
+            'material': row[3],
+            'descripcion': row[4],
+            'precio': row[5],
+            'imagen': row[6]
+        }
+        for row in rows
+        ]
+        cursor.close()
+        db.close()
+        return productos
+    
+    @staticmethod
+    def get_categorias():
+        db = get_db()
+        cursor = db.cursor()
+        cursor.execute("SELECT DISTINCT Categoría FROM productos")
+        rows = cursor.fetchall()
+        categorias = [{'categoria': row[0]} for row in rows]
+        cursor.close()
+        return categorias
         
     def serealize(self):
         return {
